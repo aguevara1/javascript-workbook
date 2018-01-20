@@ -4,8 +4,8 @@
 
 function adding(num1,num2){
 
-  const sum=num1+num2;
-  return sum;
+  return num1+num2;
+
 }
 
 adding(57,388);
