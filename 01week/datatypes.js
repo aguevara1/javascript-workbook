@@ -1,110 +1,84 @@
 'use strict'
 
-function adding(num1, num2) {
-
-  return num1 + num2;
-
-}
-
-adding(57, 388);
-
-function currentDate() {
-
+function currentDayTime() {
   const today = new Date();
   const day = today.getDay();
-  const daylist = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
-  console.log(`Today is : ${daylist[day]}.`);
+  const dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
   let hour = today.getHours();
+  const minute = today.getMinutes();
+  const second = today.getSeconds();
 
   if (hour > 12) {
     hour -= 12;
   } else if (hour === 0) {
     hour = 12;
   }
-
-  var minute = today.getMinutes();
-  var second = today.getSeconds();
-
+  console.log(`Today is : ${dayList[day]}.`);
   return ("Current Time : " + hour + " : " + minute + " : " + second);
-
 }
 
-currentDate();
+currentDayTime();
 
 
 function numToString(num) {
-
-  var n = num.toString();
-  return n;
+  return num.toString();
 }
 
-numToString(15); //function call
+numToString(388);
+
 
 
 function stringToNumber(string) {
-
-  return parseFloat(string); //use newNumber(str)
-
+  return Number(string);
 }
 
-stringToNumber('45.8');
+stringToNumber('sixteen');
 
 
-function whatType(variable) {
-
-  const m = typeof variable;
-
-  return m;
-
-
+function whatType(type) {
+  return typeof type;
 }
 
-whatType('huuuu');
+whatType(true);
 
-function adding(num1, num2) {
 
-  const sum = num1 + num2;
-  return sum;
+function addTwoNumbers(num1, num2) {
+  return num1 + num2;
 }
+addTwoNumbers(57, 388);
 
-adding(57, 388);
 
-
-function check(num3, num4) {
-  const j = 15;
+function twoThingsTrue(thing1, thing2) {
   const message = 'both true';
-  if (j > num3 && j > num4) {
+  if (thing1 && thing2) {
     return message;
   } else {
     return false;
   }
-
 }
 
-check(33, 66);
+twoThingsTrue(true, 66);
 
-function oneOfTwo(num5, num6) {
-  const u = 7;
+
+function oneOfTwo(thing3, thing4) {
   const message1 = 'One of two are true';
-
-  if (u > num5 || u > num6) {
+  if (thing3 || thing4) {
     return message1;
   } else {
     return false;
   }
-
 }
 
-oneOfTwo(13, 12);
+oneOfTwo(8, 9);
 
-function bothNotTrue(num7, num8) {
-  const h = 8;
+
+function bothNotTrue(thing5, thing6) {
   const message3 = 'both not true';
-  if (h !== num7 && h !== num8) {
+  if (!thing5 && !thing6) {
     return message3;
   } else {
     return false;
   }
 }
 
-bothNotTrue(5, 0);
+bothNotTrue('', undefined);
