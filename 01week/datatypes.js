@@ -61,7 +61,6 @@ function whatType(variable) {
 
 whatType('huuuu');
 
-
 function adding(num1, num2) {
 
   const sum = num1 + num2;
