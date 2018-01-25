@@ -8,16 +8,40 @@ const rl = readline.createInterface({
 });
 
 
-function rockPaperScissors(hand1, hand2) {
+const rockPaperScissors=(hand1, hand2)=> {
+  const message = "Its's a tie!";
+  const message1 = "Hand one wins!";
+  const message2 = "Hand two wins!";
 
-  // Write code here
+  if (hand1 === hand2) {
+    return message;
+  } else if (hand1 === 'rock') {
+    if (hand2 === 'paper') {
+      return message2;
+    } else {
+      return message1;
+    }
 
+  } else if (hand1 === 'paper') {
+    if (hand2 === 'rock') {
+      return message1;
+    } else {
+      return message2;
+    }
+
+  }
+  // hand1 must be Scissors
+  if (hand2 === 'rock') {
+    return message2;
+  } else {
+    return message1;
+  }
 }
 
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
-      console.log( rockPaperScissors(answer1, answer2) );
+      console.log(rockPaperScissors(answer1, answer2));
       getPrompt();
     });
   });
