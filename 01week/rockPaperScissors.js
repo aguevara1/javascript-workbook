@@ -7,34 +7,33 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
 const rockPaperScissors=(hand1, hand2)=> {
-  const message = "Its's a tie!";
-  const message1 = "Hand one wins!";
-  const message2 = "Hand two wins!";
+  const aTie = "Its's a tie!";
+  const oneWins = "Hand one wins!";
+  const twoWins = "Hand two wins!";
 
   if (hand1 === hand2) {
-    return message;
+    return aTie;
   } else if (hand1 === 'rock') {
     if (hand2 === 'paper') {
-      return message2;
+      return twoWins;
     } else {
-      return message1;
+      return oneWins;
     }
 
   } else if (hand1 === 'paper') {
     if (hand2 === 'rock') {
-      return message1;
+      return oneWins;
     } else {
-      return message2;
+      return twoWins;
     }
 
   }
   // hand1 must be Scissors
   if (hand2 === 'rock') {
-    return message2;
+    return twoWins;
   } else {
-    return message1;
+    return oneWins;
   }
 }
 
