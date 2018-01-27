@@ -14,11 +14,13 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 //write function isValid
-const possibleHands = ["rock", "paper", "scissors"];
+
 
 const isValid = (handOne, handTwo) => {
+  const newHand1 = handOne.toLowerCase().trim();
+  const newHand2 = handTwo.toLowerCase().trim();
+  const possibleHands = ["rock", "paper", "scissors"];
   if (possibleHands.indexOf(newHand1) !== -1 && possibleHands.indexOf(newHand2) !== -1) {
-    console.log(newHand1);
     return true;
   } else {
     return false;
@@ -26,8 +28,7 @@ const isValid = (handOne, handTwo) => {
 }
 
 const rockPaperScissors = (hand1, hand2) => {
-  const newHand1 = hand1.toLowerCase().trim();
-  const newHand2 = handTwo.toLowerCase().trim();
+
 
   if (isValid(hand1, hand2) == true) {
 
@@ -93,8 +94,6 @@ if (typeof describe === 'function') {
       assert.equal(isValid('hello', 'SCISSORS'), "Invalid input!");
       assert.equal(isValid('rock ', 'hello'), "Invalid input!");
     });
-
-
 
   });
 } else {
