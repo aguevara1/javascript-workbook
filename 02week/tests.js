@@ -13,10 +13,10 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-//write function isValid
-let newHand1='';
+
+let newHand1='';  //global variables
 let newHand2='';
-const isValid = (handOne, handTwo) => {
+const isValid = (handOne, handTwo) => {  // function checks for valid input
   newHand1 = handOne.toLowerCase().trim();
   newHand2 = handTwo.toLowerCase().trim();
   const possibleHands = ["rock", "paper", "scissors"];
@@ -29,7 +29,7 @@ const isValid = (handOne, handTwo) => {
 
 const rockPaperScissors = (hand1, hand2) => {
 
-  if (isValid(hand1, hand2) == true) {
+  if (isValid(hand1, hand2) == true) {  // call function isValid to check inputs
 
     if (newHand1 === newHand2) { //check if hand 1 is equal to hand 2
       return "It's a tie!"; // if yes it's a tie
@@ -37,35 +37,32 @@ const rockPaperScissors = (hand1, hand2) => {
       if (newHand2 === 'paper') { // check if hand 2 is equal to paper
         return "Hand two wins!"; // if yes hand 2 wins
       } else {
-        //  console.log(hand1);
         return "Hand one wins!"; //one wins
       }
 
     } else if (newHand1 === 'paper') { // check if hand 1 is equal to paper
       if (newHand2 === 'rock') { //check if hand 2 is equal
-        return "Hand one wins!"; //if yes
+        return "Hand one wins!"; //if yes hand one wins
       } else {
-        return "Hand two wins!";
+        return "Hand two wins!";  // else hand 2 wins
       }
     }
     // hand1 must be Scissors
-    if (newHand2 === 'rock') {
-      return "Hand two wins!";
+    if (newHand2 === 'rock') {  //check if hand2 is equal to rock
+      return "Hand two wins!";  // hand 2 wins
     } else {
-      return "Hand one wins!";
+      return "Hand one wins!";   // if not hand one wins
     }
 
-  } else {
+  } else {       // user did not enter rock, paper, scissors
     return "Invalid input! Enter(rock paper scissors)";
   }
-
-
 }
 
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
-      console.log(rockPaperScissors(answer1, answer2)); // enter isValid function
+      console.log(rockPaperScissors(answer1, answer2)); //function call to rockPaperScissors
       getPrompt();
     });
   });
