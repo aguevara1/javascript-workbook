@@ -1,10 +1,11 @@
 'use strict'
 
-function currentDayTime() {
+const currentDayTime = () => {
   const today = new Date();
   const day = today.getDay();
   const dayList = ["Sunday", "Monday", "Tuesday", "Wednesday ", "Thursday", "Friday", "Saturday"];
   let hour = today.getHours();
+  console.log(hour);
   const minute = today.getMinutes();
   const second = today.getSeconds();
 
@@ -17,68 +18,50 @@ function currentDayTime() {
   return ("Current Time : " + hour + " : " + minute + " : " + second);
 }
 
-currentDayTime();
+console.log(currentDayTime());
 
 
-function numToString(num) {
-  return num.toString();
-}
+const numToString = (num) => num.toString();
 
 numToString(388);
 
 
 
-function stringToNumber(string) {
-  return Number(string);
-}
+const stringToNumber = (str) => Number(str);
 
 stringToNumber('sixteen');
 
 
-function whatType(type) {
-  return typeof type;
-}
+const whatType = (type) => typeof type;
 
 whatType(true);
 
 
-function addTwoNumbers(num1, num2) {
-  return num1 + num2;
-}
+const addTwoNumbers = (num1, num2) => num1 + num2;
 addTwoNumbers(57, 388);
 
 
-function twoThingsTrue(thing1, thing2) {
-  const message = 'both true';
+const twoThingsTrue = (thing1, thing2) => {
   if (thing1 && thing2) {
-    return message;
-  } else {
-    return false;
+    return true;
   }
 }
+twoThingsTrue(0, 66);
 
-twoThingsTrue(true, 66);
 
-
-function oneOfTwo(thing3, thing4) {
-  const message1 = 'One of two are true';
+const oneOfTwo = (thing3, thing4) => {
   if (thing3 || thing4) {
-    return message1;
-  } else {
-    return false;
+    return true;
   }
 }
 
-oneOfTwo(8, 9);
+oneOfTwo(null, 'jjj');
 
 
-function bothNotTrue(thing5, thing6) {
-  const message3 = 'both not true';
+const bothNotTrue = (thing5, thing6) => {
   if (!thing5 && !thing6) {
-    return message3;
-  } else {
-    return false;
+    return true;
   }
 }
 
-bothNotTrue('', undefined);
+bothNotTrue(0, 0);
