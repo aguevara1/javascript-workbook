@@ -26,7 +26,6 @@ const numToString = (num) => num.toString();
 numToString(388);
 
 
-
 const stringToNumber = (str) => Number(str);
 
 stringToNumber('sixteen');
