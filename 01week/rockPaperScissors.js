@@ -8,6 +8,11 @@ const rl = readline.createInterface({
 });
 
 const rockPaperScissors=(hand1, hand2)=> {
+   hand1 = hand1.toLowerCase();
+   hand2 = hand2.toLowerCase();
+   hand1=hand1.trim();
+   hand2=hand2.trim();
+
   const aTie = "Its's a tie!";
   const oneWins = "Hand one wins!";
   const twoWins = "Hand two wins!";
