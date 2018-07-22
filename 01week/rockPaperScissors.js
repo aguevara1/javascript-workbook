@@ -7,41 +7,44 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+// function will evaluate 2 inputs to see who wins
 const rockPaperScissors = (hand1, hand2) => {
-  hand1 = hand1.toLowerCase();
-  hand2 = hand2.toLowerCase();
-  hand1 = hand1.trim();
-  hand2 = hand2.trim();
 
-  const aTie = "It's a tie!";
-  const oneWins = "Hand one wins!";
-  const twoWins = "Hand two wins!";
+  // first check if input is typed correctly
+  hand1 = hand1.toLowerCase().trim();
+  hand2 = hand2.toLowerCase().trim();
 
+ // call function to see if input is valid
+ if(isValid(hand1,hand2))
+
+  // first check if inputs are the same
   if (hand1 === hand2) {
-    return aTie;
+    return "It's a tie!";
   } else if (hand1 === 'rock') {
     if (hand2 === 'paper') {
-      return twoWins;
+      return "Hand two wins!";
     } else {
-      return oneWins;
+      return "Hand one wins!";
     }
 
   } else if (hand1 === 'paper') {
     if (hand2 === 'rock') {
-      return oneWins;
+      return "Hand one wins!";
     } else {
-      return twoWins;
+      return "Hand two wins!";
     }
 
   }
   // hand1 must be Scissors
   if (hand2 === 'rock') {
-    return twoWins;
+    return "Hand two wins!";
   } else {
-    return oneWins;
+    return "Hand one wins!";
   }
 }
 
+/* this function prompts user to enter input and calls main function to
+evaluate hands and calls itself in a loop */
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
@@ -52,7 +55,6 @@ function getPrompt() {
 }
 
 // Tests
-
 if (typeof describe === 'function') {
 
   describe('#rockPaperScissors()', () => {
