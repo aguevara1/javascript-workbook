@@ -9,7 +9,9 @@ const rl = readline.createInterface({
 //global variables
 let newHand1 = '';
 let newHand2 = '';
+
 // function checks for valid input
+// trims whitespace and makes lowercase
 const isValid = (handOne, handTwo) => {
   newHand1 = handOne.toLowerCase().trim();
   newHand2 = handTwo.toLowerCase().trim();
@@ -28,7 +30,7 @@ const rockPaperScissors = (hand1, hand2) => {
 
   // is the input valid before comparing hands
   //call function to check values
-  if (isValid(hand1, hand2)) {
+  if (isValid(hand1, hand2)== true) {
 
     // first check if inputs are the same
     //if hand1 is Rock other cases for hand2
