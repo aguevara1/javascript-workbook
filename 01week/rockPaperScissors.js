@@ -6,44 +6,58 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+//global variables
+let newHand1 = '';
+let newHand2 = '';
+// function checks for valid input
+const isValid = (handOne, handTwo) => {
+  newHand1 = handOne.toLowerCase().trim();
+  newHand2 = handTwo.toLowerCase().trim();
+  const possibleHands = ["rock", "paper", "scissors"];
+  if (possibleHands.indexOf(newHand1) !== -1 && possibleHands.indexOf(newHand2) !== -1) {
+    return true;
+  } else {
+    return "Invalid input! Enter(rock paper scissors)";
+  }
+}
 
 
 // function will evaluate 2 inputs to see who wins
 // returns winning hand
 const rockPaperScissors = (hand1, hand2) => {
 
-  // will trim any whitespace and make all lowercase
-  // before comparing the hands
-  hand1 = hand1.toLowerCase().trim();
-  hand2 = hand2.toLowerCase().trim();
+  // is the input valid before comparing hands
+  //call function to check values
+  if (isValid(hand1, hand2)) {
 
+    // first check if inputs are the same
+    //if hand1 is Rock other cases for hand2
+    if (newHand1 === newHand2) {
+      return "It's a tie!";
+    } else if (newHand1 === 'rock') {
+      if (newHand2 === 'paper') {
+        return "Hand two wins!";
+      } else {
+        return "Hand one wins!";
+      }
+      // if hand1 is Paper other cases for hand2
+    } else if (newHand1 === 'paper') {
+      if (newHand2 === 'rock') {
+        return "Hand one wins!";
+      } else {
+        return "Hand two wins!";
+      }
 
-  // first check if inputs are the same
-  //if hand1 is Rock other cases for hand2
-  if (hand1 === hand2) {
-    return "It's a tie!";
-  } else if (hand1 === 'rock') {
-    if (hand2 === 'paper') {
+    }
+    // hand1 must be Scissors, other cases for hand2
+    if (newHand2 === 'rock') {
       return "Hand two wins!";
     } else {
       return "Hand one wins!";
     }
-     // if hand1 is Paper other cases for hand2
-  } else if (hand1 === 'paper') {
-    if (hand2 === 'rock') {
-      return "Hand one wins!";
-    } else {
-      return "Hand two wins!";
-    }
-
-  }
-  // hand1 must be Scissors, other cases for hand2
-  if (hand2 === 'rock') {
-    return "Hand two wins!";
   } else {
-    return "Hand one wins!";
+    return "Invalid input! Enter(rock paper scissors)";
   }
-
 
 }
 
