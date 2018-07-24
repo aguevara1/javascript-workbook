@@ -6,13 +6,14 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
-//global variables
-let newHand1 = '';
-let newHand2 = '';
 
-// function checks for valid input
+//global variables
+let newHand1;
+let newHand2;
+
+// function checks for valid input from user
 // trims whitespace and makes lowercase
-// returns true if hands are valid
+// returns true if inputs are valid
 const isValid = (handOne, handTwo) => {
   newHand1 = handOne.toLowerCase().trim();
   newHand2 = handTwo.toLowerCase().trim();
@@ -20,15 +21,14 @@ const isValid = (handOne, handTwo) => {
   return possibleHands.indexOf(newHand1) !== -1 && possibleHands.indexOf(newHand2) !== -1;
 }
 
-
 // function will evaluate 2 inputs to see who wins
 // returns winning hand. Before comparing hands, will call function
-// isValid to check if the inputs are valid choices
+// isValid to check if the inputs are valid
 const rockPaperScissors = (hand1, hand2) => {
 
-  // is the input valid before comparing hands
+  // check if input is valid before comparing hands
   //call function to check values
-  if (isValid(hand1, hand2)== true) {
+  if (isValid(hand1, hand2) == true) {
 
     // first check if inputs are the same
     //if hand1 is Rock other cases for hand2
