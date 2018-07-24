@@ -12,20 +12,18 @@ let newHand2 = '';
 
 // function checks for valid input
 // trims whitespace and makes lowercase
+// returns true if hands are valid
 const isValid = (handOne, handTwo) => {
   newHand1 = handOne.toLowerCase().trim();
   newHand2 = handTwo.toLowerCase().trim();
   const possibleHands = ["rock", "paper", "scissors"];
-  if (possibleHands.indexOf(newHand1) !== -1 && possibleHands.indexOf(newHand2) !== -1) {
-    return true;
-  } else {
-    return "Invalid input! Enter(rock paper scissors)";
-  }
+  return possibleHands.indexOf(newHand1) !== -1 && possibleHands.indexOf(newHand2) !== -1;
 }
 
 
 // function will evaluate 2 inputs to see who wins
-// returns winning hand
+// returns winning hand. Before comparing hands, will call function
+// isValid to check if the inputs are valid choices
 const rockPaperScissors = (hand1, hand2) => {
 
   // is the input valid before comparing hands
@@ -76,7 +74,6 @@ function getPrompt() {
 
 // Test Cases
 if (typeof describe === 'function') {
-
   describe('#rockPaperScissors()', () => {
     it('should detect a tie', () => {
       assert.equal(rockPaperScissors('rock', 'rock'), "It's a tie!");
