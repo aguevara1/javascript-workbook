@@ -13,10 +13,14 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+//global variables
+let newHand1;
+let newHand2;
 
-let newHand1='';  //global variables
-let newHand2='';
-const isValid = (handOne, handTwo) => {  // function checks for valid input
+// function checks for valid input from user
+// trims whitespace and makes lowercase
+// returns true if inputs are valid
+const isValid = (handOne, handTwo) => {
   newHand1 = handOne.toLowerCase().trim();
   newHand2 = handTwo.toLowerCase().trim();
   const possibleHands = ["rock", "paper", "scissors"];
@@ -27,31 +31,38 @@ const isValid = (handOne, handTwo) => {  // function checks for valid input
   }
 }
 
+// function will evaluate 2 inputs to see who wins
+// returns winning hand. Before comparing hands, will call function
+// isValid to check if the inputs are valid
 const rockPaperScissors = (hand1, hand2) => {
 
-  if (isValid(hand1, hand2) == true) {  // call function isValid to check inputs
+  // check if input is valid before comparing hands
+   //call function to check values
+  if (isValid(hand1, hand2) == true) {
 
-    if (newHand1 === newHand2) { //check if hand 1 is equal to hand 2
-      return "It's a tie!"; // if yes it's a tie
-    } else if (newHand1 === 'rock') { //check if hand 1 is equal rock
-      if (newHand2 === 'paper') { // check if hand 2 is equal to paper
-        return "Hand two wins!"; // if yes hand 2 wins
+    // first check if inputs are the same
+     //if hand1 is Rock other cases for hand2
+    if (newHand1 === newHand2) {
+      return "It's a tie!";
+    } else if (newHand1 === 'rock') {
+      if (newHand2 === 'paper') {
+        return "Hand two wins!";
       } else {
-        return "Hand one wins!"; //one wins
+        return "Hand one wins!";
       }
-
-    } else if (newHand1 === 'paper') { // check if hand 1 is equal to paper
-      if (newHand2 === 'rock') { //check if hand 2 is equal
-        return "Hand one wins!"; //if yes hand one wins
+        // if hand1 is Paper other cases for hand2
+    } else if (newHand1 === 'paper') {
+      if (newHand2 === 'rock') {
+        return "Hand one wins!";
       } else {
-        return "Hand two wins!";  // else hand 2 wins
+        return "Hand two wins!";
       }
     }
-    // hand1 must be Scissors
-    if (newHand2 === 'rock') {  //check if hand2 is equal to rock
-      return "Hand two wins!";  // hand 2 wins
+    // hand1 must be Scissors, other cases for hand2
+    if (newHand2 === 'rock') {
+      return "Hand two wins!";
     } else {
-      return "Hand one wins!";   // if not hand one wins
+      return "Hand one wins!";
     }
 
   } else {       // user did not enter rock, paper, scissors
@@ -59,17 +70,19 @@ const rockPaperScissors = (hand1, hand2) => {
   }
 }
 
+/* this function prompts user to enter input and calls main function to
+evaluate hands, then calls itself in a loop */
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
     rl.question('hand2: ', (answer2) => {
-      console.log(rockPaperScissors(answer1, answer2)); //function call to rockPaperScissors
+      console.log(rockPaperScissors(answer1, answer2));
       getPrompt();
     });
   });
 }
 
+// Test cases
 if (typeof describe === 'function') {
-
   describe('#rockPaperScissors()', () => {
     it('should detect a tie', () => {
       assert.equal(rockPaperScissors('rock', 'rock'), "It's a tie!");
