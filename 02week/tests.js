@@ -26,46 +26,47 @@ const isValid = (handOne, handTwo) => {
   const possibleHands = ["rock", "paper", "scissors"];
   if (possibleHands.indexOf(newHand1) !== -1 && possibleHands.indexOf(newHand2) !== -1) {
     return true;
-  } else {
+  }else{
     return "Invalid input! Enter(rock paper scissors)";
   }
 }
 
-// function will evaluate 2 inputs to see who wins
-// returns winning hand. Before comparing hands, will call function
-// isValid to check if the inputs are valid
+/* function will evaluate 2 inputs to see who wins
+ returns winning hand. Before comparing hands, will call function
+  isValid to check if the inputs are valid */
+
 const rockPaperScissors = (hand1, hand2) => {
 
-  // check if input is valid before comparing hands
-   //call function to check values
-  if (isValid(hand1, hand2) == true) {
+  /* check if input explicitly returns true, because else statement returned
+  is evaluated as true. Before comparing hands call function to check values  */
+  if(isValid(hand1, hand2)==true){
 
     // first check if inputs are the same
      //if hand1 is Rock other cases for hand2
-    if (newHand1 === newHand2) {
+    if(newHand1 === newHand2) {
       return "It's a tie!";
-    } else if (newHand1 === 'rock') {
-      if (newHand2 === 'paper') {
+    }else if(newHand1 === 'rock') {
+      if(newHand2 === 'paper') {
         return "Hand two wins!";
-      } else {
+      }else{
         return "Hand one wins!";
       }
         // if hand1 is Paper other cases for hand2
-    } else if (newHand1 === 'paper') {
-      if (newHand2 === 'rock') {
+    }else if(newHand1 === 'paper') {
+      if(newHand2 === 'rock') {
         return "Hand one wins!";
-      } else {
+      }else{
         return "Hand two wins!";
       }
     }
     // hand1 must be Scissors, other cases for hand2
-    if (newHand2 === 'rock') {
+    if(newHand2 === 'rock') {
       return "Hand two wins!";
-    } else {
+    }else{
       return "Hand one wins!";
     }
 
-  } else {       // user did not enter rock, paper, scissors
+  }else{       // user did not enter rock, paper, scissors
     return "Invalid input! Enter(rock paper scissors)";
   }
 }
@@ -103,6 +104,8 @@ if (typeof describe === 'function') {
       assert.equal(isValid('hello', 'goodbye'), "Invalid input! Enter(rock paper scissors)");
       assert.equal(isValid('hello', 'SCISSORS'), "Invalid input! Enter(rock paper scissors)");
       assert.equal(isValid('rock ', 'hello'), "Invalid input! Enter(rock paper scissors)");
+      assert.equal(isValid('', ''), "Invalid input! Enter(rock paper scissors)");
+      assert.equal(isValid('', 'scissors'), "Invalid input! Enter(rock paper scissors)");
     });
 
   });
