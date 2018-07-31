@@ -13,7 +13,7 @@ let board = [
 ];
 
 let playerTurn = 'X';
-
+//join() joins all elements of array into a string and returns string
 function printBoard() {
   console.log('   0  1  2');
   console.log('0 ' + board[0].join(' | '));
@@ -39,8 +39,28 @@ function checkForWin() {
   // Your code here
 }
 
+// check if input is vali
+ function isValid(row1,column1){
+    const possibleNumbers=[0,1,2];
+   return possibleNumbers.indexOf(parseInt(row1,10)) !==-1 && possibleNumbers.indexOf(parseInt(column1,10))!== -1;
+
+
+}
+
+
+
 function ticTacToe(row, column) {
-  // Your code here
+  // check for valid input
+
+  if(isValid(row,column)){
+  board[row][column]='X';
+
+
+  } else{
+    console.log("Enter numbers 0-2 only!!!!!!!!");
+  }
+
+
 }
 
 function getPrompt() {
