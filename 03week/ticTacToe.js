@@ -24,103 +24,72 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  // Your code here
-return board[0][0] == playerTurn && board[0][1] == playerTurn && board[0][2] == playerTurn ||
-      board[1][0] == playerTurn && board[1][1] == playerTurn && board[1][2] == playerTurn ||
-      board[2][0] == playerTurn && board[2][1] == playerTurn && board[2][2] == playerTurn;
+  // Your code
+  const horizontal = [0, 1, 2];
+  let result = horizontal.some(indices => {
+    return board[indices][0] == playerTurn && board[indices][1] == playerTurn && board[indices][2] == playerTurn
+  });
 
-
-/*  if (board[0][0] === turn && board[0][1] === turn && board[0][2] === turn) {
-    return true;
-  } else if (board[1][0] === turn && board[1][1] === turn && board[1][2] === turn) {
-    return true;
-  } else if (board[2][0] === turn && board[2][1] === turn && board[2][2] === turn) {
-    return true;
-  }  */
+  return result;
 }
 
 function verticalWin() {
-  // Your code here
-    const verticalResult=board[0][0] == playerTurn && board[1][0] == playerTurn && board[2][0] == playerTurn ||
-    board[0][1] == playerTurn && board[1][1] == playerTurn && board[2][1] == playerTurn ||
-    board[0][2] == playerTurn && board[1][2] == playerTurn && board[2][2] == playerTurn;
+  const vertical = [0, 1, 2];
+  let result1 = vertical.some(indx => {
+    return board[0][indx] == playerTurn && board[1][indx] == playerTurn && board[2][indx] == playerTurn
+  });
 
-    console.log('Inside VerticalWin function');
-    console.log(verticalResult);
-    return verticalResult;
-  // if (board[0][0] === turn && board[1][0] === turn && board[2][0] === turn) {
-  //   return true;
-  // } else if (board[0][1] === turn && board[1][1] === turn && board[2][1] === turn) {
-  //   return true;
-  // } else if (board[0][2] === turn && board[1][2] === turn && board[2][2] === turn) {
-  //   return true;
-  // }
+  return result1;
+
 }
 
 function diagonalWin() {
-  // Your code her
-   if( board[0][0] == playerTurn && board[1][1] == playerTurn && board[2][2] == playerTurn ||
-   board[0][2] == playerTurn && board[1][1] == playerTurn && board[2][0] == playerTurn){
-     return true;
-   }else{
-     return false;
-   }
-  /*
-  if (board[0][0] === turn && board[1][1] === turn && board[2][2] === turn) {
-    return true;
-  } else if (board[0][2] === turn && board[1][1] === turn && board[2][0] === turn) {
-    return true;
+  /*  if center space is equal to playerTurn then check the other 2.
+      will return true if either of the 2 sets will evaluate to true
+  */
+  if (board[1][1] == playerTurn){
+    return board[0][0] == playerTurn && board[2][2] == playerTurn ||
+      board[0][2] == playerTurn && board[2][0] == playerTurn
   }
-*/
+
 }
 
 function checkForWin() {
-  // Your code here
+  /* will call each of these functions and will return true if one
+  of these functions returns true
+  */
   return verticalWin() || horizontalWin() || diagonalWin();
-/*
-   if (verticalWin(turn)) {
-      return true;
-    } else if (horizontalWin(turn)) {
-        return true;
-   } else if (diagonalWin(turn)) {
-       return true;
-     }
-*/
+
 }
 
-// check if input is valid
+/* check if input is valid. Input must be 1 of the possibleNumbers, if not return
+   falsey
+*/
 function isValid(row1, column1) {
   const possibleNumbers = [0, 1, 2];
   return possibleNumbers.indexOf(parseInt(row1, 10)) !== -1 && possibleNumbers.indexOf(parseInt(column1, 10)) !== -1;
 
 }
 
-function reset(){
-
-
+function reset() {
 
 }
 
 function ticTacToe(row, column) {
   // check for valid input
-
   if (isValid(row, column)) {
     board[row][column] = playerTurn;
 
     if (checkForWin()) {
-
-      console.log(' Won!!!!');
+      console.log(playerTurn + ' Has Won The Game!!!!');
       return true;
     } else {
       playerTurn === 'X' ? playerTurn = 'O' : playerTurn = 'X';
     }
 
-
   } else {
     console.log("Enter numbers 0-2 only!!!!!!!!");
   }
-
-
 
 }
 
