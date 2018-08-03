@@ -19,9 +19,12 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
-  // Your code here
+function movePiece(startStack, endStack) {
+  // Your code her
 
+
+     const input=stacks[startStack].pop();
+     stacks[endStack].push(input);
 }
 
 function isLegal() {
@@ -36,6 +39,7 @@ function checkForWin() {
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
+  movePiece(startStack,endStack );
 
 }
 
@@ -50,5 +54,3 @@ function getPrompt() {
 }
 
 getPrompt();
-
-
