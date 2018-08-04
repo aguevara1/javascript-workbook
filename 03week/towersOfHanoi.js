@@ -47,25 +47,47 @@ const checkForWin= () => {
 
 }
 
+const isValid= (startStack, endStack) => {
+
+   const possibleValues=['a','b','c'];
+
+if( possibleValues.indexOf(startStack)!==-1 && possibleValues.indexOf(endStack)!==-1){
+  return true;
+}else{
+  return "Invalid input! Enter(a,b or c)"
+}
+
+
+}
+
+
 const towersOfHanoi= (startStack, endStack) => {
   // Your code here
+  if(isValid(startStack, endStack)){
 
+    if(isLegal(startStack, endStack)){
 
-  if(isLegal(startStack, endStack)){
-
-    movePiece(startStack, endStack);
+      movePiece(startStack, endStack);
 
       if(checkForWin()){
         console.log("You Just Won!!!!");
+         // if win, call reset in HERE
+
       }
 
 
 
+    } else{
+      console.log("Invalid move, can only move smaller piece onto bigger piece");
+    }
+
   } else{
-    console.log("Invalid move, can only move smaller piece onto bigger piece");
+      console.log("Invalid input! Enter(a,b or c)");
+
   }
 
 }
+
 
 const getPrompt= () => {
   printStacks();
@@ -124,7 +146,20 @@ if (typeof describe === 'function') {
       };
       assert.equal(checkForWin(), false);
     });
+
   });
+
+  describe('#isValid()', () => {
+    it('should only accept letters a,b or c ', () => {
+      assert.equal(isValid('h', 'b'), "Invalid input! Enter(a,b or c)");
+      assert.equal(isValid('a', 'S'), "Invalid input! Enter(a,b or c)");
+      //assert.equal(isValid('rock ', 'hello'), "Invalid input! Enter(rock paper scissors)");
+      assert.equal(isValid('', ''), "Invalid input! Enter(a,b or c)");
+      //assert.equal(isValid('', 'scissors'), "Invalid input! Enter(rock paper scissors)");
+    });
+  });
+
+
 } else {
 
   getPrompt();
