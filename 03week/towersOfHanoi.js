@@ -49,10 +49,9 @@ const checkForWin= () => {
 
 const isValid= (startStack, endStack) => {
 
-   const possibleValues=['a','b','c'];
 
-   console.log(startStack);
-   console.log(endStack);
+   const possibleValues=["a","b","c"];
+
 
 if( possibleValues.indexOf(startStack)!==-1 && possibleValues.indexOf(endStack)!==-1){
   return true;
@@ -60,13 +59,15 @@ if( possibleValues.indexOf(startStack)!==-1 && possibleValues.indexOf(endStack)!
   return "Invalid input! Enter(a,b or c)"
 }
 
-
 }
 
 
 const towersOfHanoi= (startStack, endStack) => {
+
+  startStack = startStack.toLowerCase().trim();
+  endStack = endStack.toLowerCase().trim();
   // Your code here
-  if(isValid(startStack, endStack)){
+  if(isValid(startStack, endStack)==true){
 
     if(isLegal(startStack, endStack)){
 
@@ -77,8 +78,6 @@ const towersOfHanoi= (startStack, endStack) => {
          // if win, call reset in HERE
 
       }
-
-
 
     } else{
       console.log("Invalid move, can only move smaller piece onto bigger piece");
@@ -156,9 +155,8 @@ if (typeof describe === 'function') {
     it('should only accept letters a,b or c ', () => {
       assert.equal(isValid('h', 'b'), "Invalid input! Enter(a,b or c)");
       assert.equal(isValid('a', 'S'), "Invalid input! Enter(a,b or c)");
-      //assert.equal(isValid('rock ', 'hello'), "Invalid input! Enter(rock paper scissors)");
       assert.equal(isValid('', ''), "Invalid input! Enter(a,b or c)");
-      //assert.equal(isValid('', 'scissors'), "Invalid input! Enter(rock paper scissors)");
+
     });
   });
 
