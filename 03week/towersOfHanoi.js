@@ -22,10 +22,10 @@ const printStacks= () => {
 const movePiece= (startStack, endStack) => {
   // Your code her
 
-
   const input = stacks[startStack].pop();
   stacks[endStack].push(input);
 }
+
 
 const isLegal= (start, end) => {
         const arrLengthStart=stacks[start].length;
@@ -50,6 +50,9 @@ const checkForWin= () => {
 const isValid= (startStack, endStack) => {
 
    const possibleValues=['a','b','c'];
+
+   console.log(startStack);
+   console.log(endStack);
 
 if( possibleValues.indexOf(startStack)!==-1 && possibleValues.indexOf(endStack)!==-1){
   return true;
