@@ -13,13 +13,13 @@ let stacks = {
   c: []
 };
 
-function printStacks() {
+const printStacks= () => {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
   console.log("c: " + stacks.c);
 }
 
-function movePiece(startStack, endStack) {
+const movePiece= (startStack, endStack) => {
   // Your code her
 
 
@@ -27,23 +27,47 @@ function movePiece(startStack, endStack) {
   stacks[endStack].push(input);
 }
 
-function isLegal() {
-  // Your code here
+const isLegal= (start, end) => {
+        const arrLengthStart=stacks[start].length;
+      //  console.log(arrLengthStart);
+        const arrLengthEnd=stacks[end].length;
+      //  console.log(arrLengthEnd);
+
+       const inputStart = stacks[start][arrLengthStart-1];
+       const inputEnd = stacks[end][arrLengthEnd-1];
+
+
+        return arrLengthEnd==0 || inputStart < inputEnd;
 
 }
 
-function checkForWin() {
+const checkForWin= () => {
   // Your code here
+  return stacks.b.length==4 || stacks.c.length==4;
 
 }
 
-function towersOfHanoi(startStack, endStack) {
+const towersOfHanoi= (startStack, endStack) => {
   // Your code here
-  movePiece(startStack, endStack);
+
+
+  if(isLegal(startStack, endStack)){
+
+    movePiece(startStack, endStack);
+
+      if(checkForWin()){
+        console.log("You Just Won!!!!");
+      }
+
+
+
+  } else{
+    console.log("Invalid move, can only move smaller piece onto bigger piece");
+  }
 
 }
 
-function getPrompt() {
+const getPrompt= () => {
   printStacks();
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
