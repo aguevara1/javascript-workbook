@@ -43,7 +43,9 @@ const isLegal = (start, end) => {
 }
 
 const resetGame= () => {
-
+  stacks.a= [4, 3, 2, 1];
+  stacks.b= [];
+  stacks.c= [];
 
 }
 
@@ -75,8 +77,11 @@ const towersOfHanoi = (startStack, endStack) => {
       movePiece(startStack1, endStack1);
 
       if (checkForWin()) {
-        console.log("You Just Won!!!!");
+
+        printStacks();
+        console.log("You Just Won Above, Game Is Reset Below, Keep Playing!!!!");
         // if win, call reset in HERE
+        resetGame();
 
       }
 
@@ -160,15 +165,19 @@ if (typeof describe === 'function') {
       assert.equal(isValidInput('', ''), false);
 
     });
-
-  /*  it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
-      assert.equal(isValidInput('A', ' b '), true);
-      assert.equal(isValidInput(' C', ' A'), true);
-      assert.equal(isValidInput('b ', 'C'), true);
-
-    });  */
-
   })
+
+
+  describe('#resetGame()', () => {
+    it('should reset the arrays to original', () => {
+      resetGame();
+      assert.deepEqual(stacks, {
+        a: [4, 3, 2, 1],
+        b: [],
+        c: []
+      });
+    });
+  });
 
 } else {
 
