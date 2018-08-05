@@ -39,14 +39,14 @@ const isLegal = (start, end) => {
   const inputStart = stacks[start][arrLengthStart - 1];
   const inputEnd = stacks[end][arrLengthEnd - 1];
 
-  return arrLengthEnd == 0 || inputStart < inputEnd;
+
+  return arrLengthStart !== 0 && arrLengthEnd===0 || inputStart < inputEnd;
 }
 
 const resetGame= () => {
   stacks.a= [4, 3, 2, 1];
   stacks.b= [];
   stacks.c= [];
-
 }
 
 const checkForWin = () => {
@@ -163,9 +163,21 @@ if (typeof describe === 'function') {
       assert.equal(isValidInput('a', 'f'), false);
       assert.equal(isValidInput('t', 'k'), false);
       assert.equal(isValidInput('', ''), false);
+    });
+
+
+  })
+
+/*
+  describe('#towersOfHanoi()', () => {
+    it('should trim and make lowercase ', () => {
+      assert.equal(towersOfHanoi('  a', 'c'), true);
 
     });
+
+
   })
+*/
 
 
   describe('#resetGame()', () => {
