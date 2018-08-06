@@ -7,72 +7,79 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//global object of arrays
 let stacks = {
   a: [4, 3, 2, 1],
   b: [],
   c: []
 };
 
-//global variables
-
+// function prints the stacks object of arrays
 const printStacks = () => {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
   console.log("c: " + stacks.c);
 }
 
-
-const movePiece = (startStack, endStack) => {
-  // Your code her
-
-  const input = stacks[startStack].pop();
-  stacks[endStack].push(input);
+// function will reset all the arrays to its original
+const resetGame = () => {
+  stacks.a = [4, 3, 2, 1];
+  stacks.b = [];
+  stacks.c = [];
 }
 
-
-const isLegal = (start, end) => {
-  const arrLengthStart = stacks[start].length;
-  //  console.log(arrLengthStart);
-  const arrLengthEnd = stacks[end].length;
-  //  console.log(arrLengthEnd);
-
-  const inputStart = stacks[start][arrLengthStart - 1];
-  const inputEnd = stacks[end][arrLengthEnd - 1];
-
-
-  return arrLengthStart !== 0 && arrLengthEnd===0 || inputStart < inputEnd;
-}
-
-const resetGame= () => {
-  stacks.a= [4, 3, 2, 1];
-  stacks.b= [];
-  stacks.c= [];
-}
-
+/* function will check array length to determine a win. Either b or c must have a length
+of 4 in order to win. function returns a truthy when either b or c array have length of 4.  */
 const checkForWin = () => {
-  // Your code here
   return stacks.b.length == 4 || stacks.c.length == 4;
 }
 
-const isValidInput = (startStack2, endStack2) => {
+/* function removes last element of array referenced by startStack and pushes it to the end of
+array referenced by endStack. */
+const movePiece = (startStack, endStack) => {
+  const poppedItem = stacks[startStack].pop();
+  stacks[endStack].push(poppedItem);
+}
 
-  const possibleValues = ['a','b','c'];
+/* function checks if move is legal. Finds array length startStack and endStack. Also
+assigns value of last element into variables. Returns truthy (first case) startStack array length is
+not 0 and endStack array length is equal to 0, or  (second case) the number in startStack is
+less than endStack */
+const isLegalMove = (start, end) => {
 
-  return possibleValues.indexOf(startStack2) !== -1 && possibleValues.indexOf(endStack2) !== -1;
+  const arrLengthStart = stacks[start].length;
+  const arrLengthEnd = stacks[end].length;
+
+  const lastElementStart = stacks[start][arrLengthStart - 1];
+  const lastElementEnd = stacks[end][arrLengthEnd - 1];
+
+  return arrLengthStart !== 0 && arrLengthEnd === 0 || lastElementStart < lastElementEnd;
 }
 
 
+/*  function creates array of possible valid values. Uses indexOf to check that input values
+ are one of the possible values in array. Returns truthy when both startStack and endStack
+ are one of the possibleValues in array and falsey when not. */
+const isValidInput = (startStack2, endStack2) => {
+
+  const possibleValues = ['a', 'b', 'c'];
+  return possibleValues.indexOf(startStack2) !== -1 && possibleValues.indexOf(endStack2) !== -1;
+}
+
+/* (parent function)- first checks to trim whitespace/make lowercase the input. Will call
+a succession of unit functions expecting a return of truthy from each function in order
+to advance to next function call. First checks for valid input- calls function
+isValidInput(), if function isLegal() returns truthy call function movePiece().
+Will then call checkForWin(), if returns truthy prints final array stacks with
+console.log of win message and calls resetGame() to start the game again from scratch  */
 const towersOfHanoi = (startStack, endStack) => {
-   /*trim any whitespace and also make all input lowercase before sending it
-   to isValidInput()
-   */
-  const startStack1= startStack.toLowerCase().trim();
+
+  const startStack1 = startStack.toLowerCase().trim();
   const endStack1 = endStack.toLowerCase().trim();
 
-  // Your code here
   if (isValidInput(startStack1, endStack1)) {
 
-    if (isLegal(startStack1, endStack1)) {
+    if (isLegalMove(startStack1, endStack1)) {
 
       movePiece(startStack1, endStack1);
 
@@ -80,7 +87,7 @@ const towersOfHanoi = (startStack, endStack) => {
 
         printStacks();
         console.log("You Just Won Above, Game Is Reset Below, Keep Playing!!!!");
-        // if win, call reset in HERE
+
         resetGame();
 
       }
@@ -96,7 +103,10 @@ const towersOfHanoi = (startStack, endStack) => {
 
 }
 
-
+/* Function prompts user to choose from what stack to move from and where to place piece.
+  Will then call main function towersOfHanoi to start game. After each user input, function calls
+  itself again to continue playing.
+ */
 const getPrompt = () => {
   printStacks();
   rl.question('start stack: ', (startStack) => {
@@ -107,7 +117,7 @@ const getPrompt = () => {
   });
 }
 
-// Tests
+// Unit test cases
 if (typeof describe === 'function') {
 
   describe('#towersOfHanoi()', () => {
@@ -121,14 +131,14 @@ if (typeof describe === 'function') {
     });
   });
 
-  describe('#isLegal()', () => {
+  describe('#isLegalMove()', () => {
     it('should not allow an illegal move', () => {
       stacks = {
         a: [4, 3, 2],
         b: [1],
         c: []
       };
-      assert.equal(isLegal('a', 'b'), false);
+      assert.equal(isLegalMove('a', 'b'), false);
     });
     it('should allow a legal move', () => {
       stacks = {
@@ -136,9 +146,10 @@ if (typeof describe === 'function') {
         b: [],
         c: []
       };
-      assert.equal(isLegal('a', 'c'), true);
+      assert.equal(isLegalMove('a', 'c'), true);
     });
   });
+
   describe('#checkForWin()', () => {
     it('should detect a win', () => {
       stacks = {
@@ -154,7 +165,6 @@ if (typeof describe === 'function') {
       };
       assert.equal(checkForWin(), false);
     });
-
   });
 
   describe('#isValidInput()', () => {
@@ -164,20 +174,7 @@ if (typeof describe === 'function') {
       assert.equal(isValidInput('t', 'k'), false);
       assert.equal(isValidInput('', ''), false);
     });
-
-
   })
-
-/*
-  describe('#towersOfHanoi()', () => {
-    it('should trim and make lowercase ', () => {
-      assert.equal(towersOfHanoi('  a', 'c'), true);
-
-    });
-
-
-  })
-*/
 
 
   describe('#resetGame()', () => {
