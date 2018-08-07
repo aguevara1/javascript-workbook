@@ -7,23 +7,81 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//global variables
+const theVowels = ['a', 'e', 'i', 'o', 'u'];
+let doesItContainVowel=false;
 
-function pigLatin(word) {
+//ascii keyboard lowercase values a-z are 97 to 122
+// compare and check for values of the characters in string
+// to not be outside of this range, if not in range return false
+const isValid = (word) => {
+  for(const letter of word){
+    if(letter <'a' || letter >'z'){
+      return false;
+    }
+  }
+  return true;
+}
 
-  // Your code here
+// put string into a new array with split()
+// forEach loop to check each vowel to see if returns a valid indexOf
+// if finds valid index in firstArr, will push index number to uptoVowel array
+// and assign global variable doesItContainVowel to true
+const findVowelIndex = (anotherWord) => {
+  const uptoVowel = [];
+  const firstArr = anotherWord.split('');
+  doesItContainVowel=false;
+
+  theVowels.forEach( (element) => {
+    if(firstArr.indexOf(element) !== -1){
+      uptoVowel.push(firstArr.indexOf(element));
+      doesItContainVowel=true;
+    }
+  });
+  // sort arranges smallest index number at the beginning of array
+  // returns the index number to parent function
+  uptoVowel.sort()
+  return uptoVowel[0];
+}
+
+//function will return word in piglatin
+//will trim white space and make lowercase then call function isValid
+//to make sure user entered valid input
+const pigLatin = (word) => {
+
+  const wordTrimmedLowerCase = word.trim().toLowerCase();
+  if (wordTrimmedLowerCase && isValid(wordTrimmedLowerCase)) {
+
+    //findVowelIndex() will return the index of first vowel
+    const theVowelIndex=findVowelIndex(wordTrimmedLowerCase);
+
+    // if global variable doesItContainVowel was set to false
+    if(doesItContainVowel===false){
+      return "Enter a regular word!!";
+    }else{
+      if(theVowelIndex===0){
+        return wordTrimmedLowerCase+'yay';
+      }else{
+        return `${wordTrimmedLowerCase.substr(theVowelIndex)}${wordTrimmedLowerCase.substr(0,theVowelIndex)}ay`;
+      }
+    }
+
+  } else {
+    return "Enter a word";
+  }
 
 }
 
 
 function getPrompt() {
   rl.question('word ', (answer) => {
-    console.log( pigLatin(answer) );
+    console.log(pigLatin(answer));
     getPrompt();
   });
 }
 
-// Tests
 
+// Tests
 if (typeof describe === 'function') {
 
   describe('#pigLatin()', () => {
