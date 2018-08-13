@@ -30,7 +30,7 @@ let z = 1;
 while (z <= 1000) {
   console.log(z);
   z += 1;
-}  
+}
 
 let b = 1;
 do {
