@@ -9,12 +9,52 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
-// Your code here
+//
+
+
+
+//create a class called crewMember with properties name, job specialSkill,ship
+//set ship to nul
+class CrewMember {
+  constructor(name, job, specialSkill, ship) {
+    this.name = name;
+    this.job = job;
+    this.specialSkill = specialSkill;
+    this.ship = null;
+  }
+  enterShip(object){
+    this.ship = object;
+    mav.crew = crewMember1;
+  }
+}
+
+//create method enterShip in crewMember class that takes in Ship instance
+
+//create ship class with name,type, ability, crew[]
+//ship has a missionStatement method
+//CrewMember has a method called enterShip
+
+
+class Ship {
+  constructor(name, job, ability) {
+    this.name = name;
+    this.job = job;
+    this.ability = ability;
+    this.crew = [];
+  }
+  missionStatement() {
+
+  }
+}
+
+let mav = new Ship('Mars Acent Vehicle', 'MAV', 'Ascend into low orbit');
+let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
+enterShip(mav);
 
 //tests
-if (typeof describe === 'function'){
-  describe('CrewMember', function(){
-    it('should have a name, a job, a specialSkill and ship upon instantiation', function(){
+if (typeof describe === 'function') {
+  describe('CrewMember', function() {
+    it('should have a name, a job, a specialSkill and ship upon instantiation', function() {
       var crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
       assert.equal(crewMember1.name, 'Rick Martinez');
       assert.equal(crewMember1.job, 'pilot');
@@ -22,7 +62,7 @@ if (typeof describe === 'function'){
       assert.equal(crewMember1.ship, null);
     });
 
-    it('can enter a ship', function(){
+    it('can enter a ship', function() {
       let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
       let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
       crewMember1.enterShip(mav);
@@ -32,8 +72,8 @@ if (typeof describe === 'function'){
     });
   });
 
-  describe('Ship', function(){
-    it('should have a name, a type, an ability and an empty crew upon instantiation', function(){
+  describe('Ship', function() {
+    it('should have a name, a type, an ability and an empty crew upon instantiation', function() {
       let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
       assert.equal(mav.name, 'Mars Ascent Vehicle');
       assert.equal(mav.type, 'MAV');
@@ -41,7 +81,7 @@ if (typeof describe === 'function'){
       assert.equal(mav.crew.length, 0);
     });
 
-    it('can return a mission statement correctly', function(){
+    it('can return a mission statement correctly', function() {
       let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
       let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
       let hermes = new Ship('Hermes', 'Main Ship', 'Interplanetary Space Travel');
