@@ -9,11 +9,7 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
-//
-
-
-
-//create a class called crewMember with properties name, job specialSkill,ship
+//create a class called crewMember with properties name, job, specialSkill,ship
 //set ship to nul
 class CrewMember {
   constructor(name, job, specialSkill, ship) {
@@ -22,9 +18,13 @@ class CrewMember {
     this.specialSkill = specialSkill;
     this.ship = null;
   }
-  enterShip(object){
-    this.ship = object;
-    mav.crew = crewMember1;
+  enterShip(shipInstance) {
+    this.ship = shipInstance;
+    shipInstance.crew.push(this);
+
+    //  console.log(this.ship);
+    //console.log(shipInstance.crew.length);
+    //console.log(shipInstance.crew[0]);
   }
 }
 
@@ -36,20 +36,34 @@ class CrewMember {
 
 
 class Ship {
-  constructor(name, job, ability) {
+  constructor(name, type, ability, crew) {
     this.name = name;
-    this.job = job;
+    this.type = type;
     this.ability = ability;
     this.crew = [];
   }
   missionStatement() {
 
+    //  return result=this.crew.length == 0 ? "Can't perform a mission yet." : this.ability;
+
+    //console.log(this.crew);
+    if (this.crew.length === 0) {
+      return "Can't perform a mission yet.";
+    } else{
+      return this.ability;
+    }
+
   }
 }
 
 let mav = new Ship('Mars Acent Vehicle', 'MAV', 'Ascend into low orbit');
+let hermes = new Ship('Hermes', 'Main Ship', 'Interplanetary Space Travel');
 let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
-enterShip(mav);
+let crewMember2 = new CrewMember('Commander Lewis', 'commander', 'geology');
+crewMember1.enterShip(mav);
+crewMember2.enterShip(hermes);
+mav.missionStatement();
+hermes.missionStatement()
 
 //tests
 if (typeof describe === 'function') {
