@@ -7,24 +7,54 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-class Checkers {
-  constructor(letter) {
-    this.letter= letter;
+
+class Checker1{
+   constructor( symbol){
+     this.symbol='R';
+   }
+
+}
+
+class Checker2{
+  constructor(symbol){
+     this.symbol='B';
   }
 
 }
 
-//const symbol= new Checkers("A");
-
-/*
-function Checker() {
-    // Your code here
-
-}
-*/
-
 function Board() {
   this.grid = [];
+
+  this.checkers=[];
+   //place or push checkers in their starting position
+  this.makeTheCheckers= function() {
+    let theRs= [[0,1],[0,3],[0,5],[0,7],[1,0],[1,2],[1,4],[1,6],[2,1],[2,3],
+     [2,5],[2,7]];
+    let theBs=[[5,0],[5,2],[5,4],[5,6],[6,1],[6,3],[6,5],[6,7],[7,0],[7,2],
+     [7,4],[7,6]];
+    // for( let i=0; i<=11 ; i++){
+    theRs.forEach( (item,index)=>{
+         let theReds=new Checker1;
+         let coordinate= theRs[index];
+        // console.log(theReds);
+            this.checkers.push(coordinate);
+
+         this.grid[coordinate[0]][coordinate[1]]=theReds;
+
+      });
+
+      theBs.forEach( (item,index)=>{
+           let theBlacks=new Checker2;
+           let coordinate1= theBs[index];
+          // console.log(theReds);
+            this.checkers.push(coordinate1);
+           //console.log(this);
+           this.grid[coordinate1[0]][coordinate1[1]]=theBlacks;
+        });
+
+   console.log(this.checkers.length);
+}
+
 
   // creates an 8x8 array, filled with null values
   this.createGrid = function() {
@@ -33,8 +63,8 @@ function Board() {
       this.grid[row] = [];
       // push in 8 columns of nulls
       for (let column = 0; column < 8; column++) {
-        if ((row + column) % 2 === 0) {
-          this.grid[row].push(null);
+         if ((row + column) % 2 === 0) {
+        this.grid[row].push(null);
         } else {
           this.grid[row].push('valid');
         }
@@ -47,9 +77,9 @@ function Board() {
 
   // prints out the board
   this.viewGrid = function() {
-  //  console.log(this);
-  this.symbol='A';
-  //  console.log(this.symbol);
+    //  console.log(this);
+    const symbol = 'A';
+    //  console.log(this.symbol);
     // add our column numbers
     let string = "  0 1 2 3 4 5 6 7\n";
     for (let row = 0; row < 8; row++) {
@@ -59,14 +89,14 @@ function Board() {
       for (let column = 0; column < 8; column++) {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
-          console.log('in with symbol');
+          //console.log('in with symbol');
           // push the symbol of the check in that location into the array
           rowOfCheckers.push(this.grid[row][column].symbol);
-           console.log(this.grid[row][column].symbol);
+        //  console.log(this.grid[row][column].symbol);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
-          console.log(this.grid[row][column]);
+          //console.log(this.grid[row][column]);
         }
       }
       // join the rowOfCheckers array to a string, separated by a space
@@ -77,22 +107,20 @@ function Board() {
     console.log(string);
   };
 
-  // Your code here
 }
 
 
-
 function Game() {
+  //this.moveChecker(whichPiece,toWhere);
   this.board = new Board();
 
   this.start = function() {
     this.board.createGrid();
+
+    this.board.makeTheCheckers();
+
     // Your code here
   };
-}
-
-function moveChecker(piece1, piece2) {
-  console.log("hello i'm in moveChecker function");
 }
 
 
@@ -109,7 +137,15 @@ function getPrompt() {
 
 const game = new Game();
 game.start();
-//game.moveChecker();
+
+game.moveChecker= (piece1, piece2)=> {
+
+  console.log(this);
+
+  console.log("hello i'm in moveChecker function");
+
+}
+
 
 
 // Tests
