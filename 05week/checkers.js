@@ -9,18 +9,16 @@ const rl = readline.createInterface({
 
 
 class Checker1 {
-  constructor(symbol) {
-    this.symbol = 'R';
+  constructor(color) {
+    if(color==='red'){
+      this.symbol='R';
+    }else{
+      this.symbol='B';
+    }
   }
 
 }
 
-class Checker2 {
-  constructor(symbol) {
-    this.symbol = 'B';
-  }
-
-}
 
 function Board() {
   this.grid = [];
@@ -58,7 +56,7 @@ function Board() {
     ];
     // for( let i=0; i<=11 ; i++){
     theRs.forEach((item, index) => {
-      let theReds = new Checker1;
+      let theReds = new Checker1('red');
       let coordinate = theRs[index];
       // console.log(theReds);
       this.checkers.push(coordinate);
@@ -67,7 +65,7 @@ function Board() {
     });
 
     theBs.forEach((item, index) => {
-      let theBlacks = new Checker2;
+      let theBlacks = new Checker1('black');
       let coordinate1 = theBs[index];
       // console.log(theReds);
       this.checkers.push(coordinate1);
@@ -150,8 +148,11 @@ class Game {
     console.log(whatPiece);
     console.log(moveTo);
     console.log("hello i'm in moveChecker function");
-    console.log(this.board.grid);
-    this.board.grid[whatPiece[0]][whatPiece[1]]=this.board.grid[moveTo[0]][moveTo[1]];
+    //console.log(this.board.grid);
+
+
+    this.board.grid[moveTo[0]][moveTo[1]]=this.board.grid[whatPiece[0]][whatPiece[1]];
+    this.board.grid[whatPiece[0]][whatPiece[1]]='';
 
   }
 
@@ -171,7 +172,7 @@ function getPrompt() {
 
 const game = new Game();
 game.start();
-game.moveChecker('50','41');
+//game.moveChecker('50','41');
 
 
 
