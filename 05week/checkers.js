@@ -8,16 +8,16 @@ const rl = readline.createInterface({
 });
 
 
-class Checker1{
-   constructor( symbol){
-     this.symbol='R';
-   }
+class Checker1 {
+  constructor(symbol) {
+    this.symbol = 'R';
+  }
 
 }
 
-class Checker2{
-  constructor(symbol){
-     this.symbol='B';
+class Checker2 {
+  constructor(symbol) {
+    this.symbol = 'B';
   }
 
 }
@@ -25,35 +25,58 @@ class Checker2{
 function Board() {
   this.grid = [];
 
-  this.checkers=[];
-   //place or push checkers in their starting position
-  this.makeTheCheckers= function() {
-    let theRs= [[0,1],[0,3],[0,5],[0,7],[1,0],[1,2],[1,4],[1,6],[2,1],[2,3],
-     [2,5],[2,7]];
-    let theBs=[[5,0],[5,2],[5,4],[5,6],[6,1],[6,3],[6,5],[6,7],[7,0],[7,2],
-     [7,4],[7,6]];
+  this.checkers = [];
+  //place or push checkers in their starting position
+  this.makeTheCheckers = function() {
+    let theRs = [
+      [0, 1],
+      [0, 3],
+      [0, 5],
+      [0, 7],
+      [1, 0],
+      [1, 2],
+      [1, 4],
+      [1, 6],
+      [2, 1],
+      [2, 3],
+      [2, 5],
+      [2, 7]
+    ];
+    let theBs = [
+      [5, 0],
+      [5, 2],
+      [5, 4],
+      [5, 6],
+      [6, 1],
+      [6, 3],
+      [6, 5],
+      [6, 7],
+      [7, 0],
+      [7, 2],
+      [7, 4],
+      [7, 6]
+    ];
     // for( let i=0; i<=11 ; i++){
-    theRs.forEach( (item,index)=>{
-         let theReds=new Checker1;
-         let coordinate= theRs[index];
-        // console.log(theReds);
-            this.checkers.push(coordinate);
+    theRs.forEach((item, index) => {
+      let theReds = new Checker1;
+      let coordinate = theRs[index];
+      // console.log(theReds);
+      this.checkers.push(coordinate);
+      this.grid[coordinate[0]][coordinate[1]] = theReds;
 
-         this.grid[coordinate[0]][coordinate[1]]=theReds;
+    });
 
-      });
+    theBs.forEach((item, index) => {
+      let theBlacks = new Checker2;
+      let coordinate1 = theBs[index];
+      // console.log(theReds);
+      this.checkers.push(coordinate1);
+      //console.log(this);
+      this.grid[coordinate1[0]][coordinate1[1]] = theBlacks;
+    });
 
-      theBs.forEach( (item,index)=>{
-           let theBlacks=new Checker2;
-           let coordinate1= theBs[index];
-          // console.log(theReds);
-            this.checkers.push(coordinate1);
-           //console.log(this);
-           this.grid[coordinate1[0]][coordinate1[1]]=theBlacks;
-        });
-
-   console.log(this.checkers.length);
-}
+    console.log(this.checkers.length);
+  }
 
 
   // creates an 8x8 array, filled with null values
@@ -63,8 +86,8 @@ function Board() {
       this.grid[row] = [];
       // push in 8 columns of nulls
       for (let column = 0; column < 8; column++) {
-         if ((row + column) % 2 === 0) {
-        this.grid[row].push(null);
+        if ((row + column) % 2 === 0) {
+          this.grid[row].push(null);
         } else {
           this.grid[row].push('valid');
         }
@@ -92,7 +115,7 @@ function Board() {
           //console.log('in with symbol');
           // push the symbol of the check in that location into the array
           rowOfCheckers.push(this.grid[row][column].symbol);
-        //  console.log(this.grid[row][column].symbol);
+          //  console.log(this.grid[row][column].symbol);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
@@ -109,18 +132,29 @@ function Board() {
 
 }
 
+class Game {
+  constructor() {
+    this.board = new Board();
 
-function Game() {
-  //this.moveChecker(whichPiece,toWhere);
-  this.board = new Board();
+    this.start = function() {
+      this.board.createGrid();
+      this.board.makeTheCheckers();
 
-  this.start = function() {
-    this.board.createGrid();
+    }
+  }
+  moveChecker(piece1, piece2) {
 
-    this.board.makeTheCheckers();
+    let whatPiece = piece1.split('');
+    let moveTo = piece2.split('');
 
-    // Your code here
-  };
+    console.log(whatPiece);
+    console.log(moveTo);
+    console.log("hello i'm in moveChecker function");
+    console.log(this.board.grid);
+    this.board.grid[whatPiece[0]][whatPiece[1]]=this.board.grid[moveTo[0]][moveTo[1]];
+
+  }
+
 }
 
 
@@ -137,14 +171,9 @@ function getPrompt() {
 
 const game = new Game();
 game.start();
+game.moveChecker('50','41');
 
-game.moveChecker= (piece1, piece2)=> {
 
-  console.log(this);
-
-  console.log("hello i'm in moveChecker function");
-
-}
 
 
 
