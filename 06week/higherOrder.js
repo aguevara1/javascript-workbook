@@ -2,25 +2,56 @@
 
 const assert = require('assert');
 
-function forEach(arr, callback) {
-  // Your code here
+// global array
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+//  Did this one in class. Works like forEach()
+const loopThrough = (arr, callback) => {
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+    if (callback) {
+      console.log("callback present");
+
+      callback(arr[i]);
+    }
+  }
 }
 
-function map(arr, callback) {
-  // Your code here
+
+// works like map(), returns new array
+const mapIt = (arr, multiplyByTwo) => {
+  const arr2 = [];
+
+  for (let x = 0; x < arr.length; x++) {
+    arr2.push(multiplyByTwo(arr[x]));
+  }
+  console.log(arr2);
 }
 
-function filter(arr, callback) {
-  // Your code here
+// callback function definition
+const multiplyByTwo = (item) => item * 2;
+// function call
+mapIt(arr, multiplyByTwo);
+
+
+
+// works like filter(), returns new array
+const filterIt = (arr, callback) => {
+  const arr3 = [];
+  for (let y = 0; y < arr.length; y++) {
+    if (callback(arr[y])) {
+      arr3.push(arr[y]);
+    }
+  }
+  console.log(arr3);
 }
 
-function some(arr, callback) {
-  // Your code here
-}
+// callback function definition
+const greaterThanFive = (item) => item > 5;
+// function call
+filterIt(arr, greaterThanFive);
 
-function every(arr, callback) {
-  // Your code here
-}
+
 
 if (typeof describe === 'function') {
 
