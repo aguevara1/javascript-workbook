@@ -52,6 +52,15 @@ const greaterThanFive = (item) => item > 5;
 filterIt(arr, greaterThanFive);
 
 
+/*
+function some(arr, callback) {
+  // Your code here
+}
+
+function every(arr, callback) {
+  // Your code here
+}
+*/
 
 if (typeof describe === 'function') {
 
