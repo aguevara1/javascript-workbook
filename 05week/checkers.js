@@ -20,12 +20,15 @@ class Checker {
 }
 
 
-function Board() {
-  this.grid = [];
+class Board {
+  constructor() {
+    this.grid = [];
 
-  this.checkers = [];
-  //place or push checkers in their starting position
-  this.makeTheCheckers = function() {
+    this.checkers = [];
+
+  }
+  //place or push checkers in theistarting position
+  makeTheCheckers() {
     let theRs = [
       [0, 1],
       [0, 3],
@@ -78,7 +81,7 @@ function Board() {
 
 
   // creates an 8x8 array, filled with null values
-  this.createGrid = function() {
+  createGrid() {
     // loop to create the 8 rows
     for (let row = 0; row < 8; row++) {
       this.grid[row] = [];
@@ -93,11 +96,11 @@ function Board() {
         //console.log(this.grid[row]);
       }
     }
-  };
+  }
 
 
   // prints out the board
-  this.viewGrid = function() {
+  viewGrid() {
     //  console.log(this);
     const symbol = 'A';
     //  console.log(this.symbol);
@@ -126,7 +129,7 @@ function Board() {
       string += "\n";
     }
     console.log(string);
-  };
+  }
 
 }
 
@@ -139,42 +142,39 @@ class Game {
       this.board.makeTheCheckers();
 
     }
+
+
   }
+
+
+  isValid(whatPiece, moveTo) {
+    //console.log(this.board.grid[moveTo[0]][moveTo[1]]);
+
+    let result = this.board.grid[moveTo[0]][moveTo[1]] !== null;
+    return result;
+  }
+
+
   moveChecker(piece1, piece2) {
 
     let whatPiece = piece1.split('');
     let moveTo = piece2.split('');
 
-    console.log(whatPiece);
-    console.log(moveTo);
+    //console.log(whatPiece);
+    //console.log(moveTo);
     console.log("hello i'm in moveChecker function");
-
     // is move valid
-    if (isValid(piece1, piece2)) {
-
-
-
+    if (this.isValid(whatPiece, moveTo)) {
 
       this.board.grid[moveTo[0]][moveTo[1]] = this.board.grid[whatPiece[0]][whatPiece[1]];
       this.board.grid[whatPiece[0]][whatPiece[1]] = '';
 
     } else {
-      return "invalid move";
+      console.log('invalid move');
     }
 
 
-
-
-
   }
-
-
-
-
-
-
-
-
 
 }
 
@@ -193,9 +193,6 @@ function getPrompt() {
 const game = new Game();
 game.start();
 //game.moveChecker('50','41');
-
-
-
 
 
 // Tests
@@ -226,6 +223,7 @@ if (typeof describe === 'function') {
       assert.equal(game.board.checkers.length, 23);
     });
   });
+
 } else {
   getPrompt();
 }
