@@ -147,24 +147,31 @@ class Game {
   }
 
 
-  isValid(whatPiece, moveTo) {
-    //console.log(this.board.grid[moveTo[0]][moveTo[1]]);
+  isValidInput(piece1, piece2) {
+    //console.log(this.b.grid[moveTo[0]][moveTo[1]]);
+  //  let whatPiece = piece1.split('');
+  //  let moveTo = piece2.split('');
+     const
+    return moveTo[0] && moveTo[1] && whatPiece[0] && whatPiece[1] <8 ;
 
-    let result = this.board.grid[moveTo[0]][moveTo[1]] !== null;
-    return result;
+    //return moveTo[0]][moveTo[1]] !== null;
+
   }
 
 
   moveChecker(piece1, piece2) {
 
-    let whatPiece = piece1.split('');
-    let moveTo = piece2.split('');
+
 
     //console.log(whatPiece);
     //console.log(moveTo);
     console.log("hello i'm in moveChecker function");
     // is move valid
-    if (this.isValid(whatPiece, moveTo)) {
+    //isLeega
+    if (this.isValidInput(piece1, piece2)) {
+      let whatPiece = piece1.split('');
+      let moveTo = piece2.split('');
+
 
       this.board.grid[moveTo[0]][moveTo[1]] = this.board.grid[whatPiece[0]][whatPiece[1]];
       this.board.grid[whatPiece[0]][whatPiece[1]] = '';
