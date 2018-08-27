@@ -140,44 +140,51 @@ class Game {
     this.start = function() {
       this.board.createGrid();
       this.board.makeTheCheckers();
-
     }
-
-
   }
 
 
-  isValidInput(piece1, piece2) {
-    //console.log(this.b.grid[moveTo[0]][moveTo[1]]);
-  //  let whatPiece = piece1.split('');
-  //  let moveTo = piece2.split('');
-     const
-    return moveTo[0] && moveTo[1] && whatPiece[0] && whatPiece[1] <8 ;
 
-    //return moveTo[0]][moveTo[1]] !== null;
+  isValidMove(whatPiece, moveTo) {
+    this.board.grid[moveTo[0]][moveTo[1]] = this.board.grid[whatPiece[0]][whatPiece[1]];
+    this.board.grid[whatPiece[0]][whatPiece[1]] = '';
 
   }
+
+  isValidInput(whatPiece, moveTo) {
+
+    return moveTo[0] < 8 && moveTo[1] < 8 && whatPiece[0] < 8 && whatPiece[1] < 8;
+  }
+
 
 
   moveChecker(piece1, piece2) {
 
-
+    let whatPiece = piece1.split('');
+    let moveTo = piece2.split('');
 
     //console.log(whatPiece);
     //console.log(moveTo);
     console.log("hello i'm in moveChecker function");
     // is move valid
     //isLeega
-    if (this.isValidInput(piece1, piece2)) {
-      let whatPiece = piece1.split('');
-      let moveTo = piece2.split('');
+    if (this.isValidInput(whatPiece, moveTo)) {
+
+      if (this.isValidMove(whatPiece, moveTo)) {
+
+        this.board.grid[moveTo[0]][moveTo[1]] = this.board.grid[whatPiece[0]][whatPiece[1]];
+        this.board.grid[whatPiece[0]][whatPiece[1]] = '';
+
+      } else {
+
+        console.log("invalid move");
+
+      }
 
 
-      this.board.grid[moveTo[0]][moveTo[1]] = this.board.grid[whatPiece[0]][whatPiece[1]];
-      this.board.grid[whatPiece[0]][whatPiece[1]] = '';
 
     } else {
-      console.log('invalid move');
+      console.log('invalid input');
     }
 
 
